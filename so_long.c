@@ -1,5 +1,40 @@
 #include "so_long.h"
 
+void	print_error(char *str)
+{
+	write (2, str, ft_strlen(str));
+	exit (1);
+}
+
+int	check_valid_file(char *file)
+{
+	int		i;
+	int		j;
+	char	*ber;
+
+	i = 0;
+	j = 0;
+	ber = ".ber";
+	while (file[i])
+	{
+		if (file[i + 1] && (file[i] == '/' && file[i + 1] == '.'))
+			return (1);
+		if (file[i] == '.')
+		{
+			while (file[i])
+			{
+				if (file[i] != ber[j])
+					return (1);
+				i++;
+				j++;
+			}
+			return (0);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	check_valid_map(int fd)
 {
 	char	*readed;
