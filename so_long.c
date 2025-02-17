@@ -35,21 +35,40 @@ int	check_valid_file(char *file)
 	return (0);
 }
 
+int	check_help(t_map *map)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	while (map)
+	{
+		map = map->next;
+	}
+}
+
 int	check_valid_map(int fd)
 {
 	char	*readed;
+	t_map	*map;
 	int		i;
 
 	i = 0;
+	map = NULL;
 	readed = get_next_line(fd);
 	while (readed && readed[0] == '1')
 	{
-		
+		add_node(&map, readed);
 		free(readed);
 		readed = NULL;
 		readed = get_next_line(fd);
 		i++;
 	}
+	if (readed)
+		free (readed);
+	if (check_help == 1)
+		return (1);
+	 return (0);
 }
 
 int main(int argc, char **argv)
@@ -60,14 +79,14 @@ int main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (check_valid_file(argv[1]))
-			print_error("only .ber file are valid");
+			print_error("only .ber file are valid\n");
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
-			print_error("file not found or permission denied");
+			print_error("file not found or permission denied\n");
 		if (check_valid_map(fd))
-			print_error("invalid map");
+			print_error("invalid map\n");
 	}
 	else
-		print_error("you need only one argument");
+		print_error("you need only one argument\n");
 	return (0);
 }
