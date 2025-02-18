@@ -35,15 +35,36 @@ int	check_valid_file(char *file)
 	return (0);
 }
 
+int	find_elem(char *str, int *p, int *c, int *e)
+{
+	while (str[i])
+	{
+		if (str[i] == 'P')
+			(*p)++;
+		else if (str[i] == 'C')
+			(*c)++;
+		else if (str[i] == 'E')
+			(*e)++;
+		else if (str[i] != '1' || str[i++] != '0')
+			return (1);
+	}
+	return (0);
+}
+
 int	check_help(t_map *map)
 {
-	int		i;
+	int		p;
+	int		c;
+	int		e;
 	char	*str;
 
-	i = 0;
+	p = 0;
+	c = 0;
+	e = 0;
 	while (map)
 	{
-		write (1, map->line, ft_strlen(map->line));
+		if (find_elem(map->line, &p, &c, &e))
+
 		map = map->next;
 	}
 }
@@ -80,14 +101,14 @@ int main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (check_valid_file(argv[1]))
-			print_error("only .ber file are valid\n");
+			print_error("Error\nonly .ber files are valid\n");
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
-			print_error("file not found or permission denied\n");
+			print_error("Error\nfile not found or permission denied\n");
 		if (check_valid_map(fd))
-			print_error("invalid map\n");
+			print_error("Error\ninvalid map\n");
 	}
 	else
-		print_error("you need only one argument\n");
+		print_error("Error\nyou need only one argument\n");
 	return (0);
 }
