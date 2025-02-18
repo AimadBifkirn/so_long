@@ -43,6 +43,7 @@ int	check_help(t_map *map)
 	i = 0;
 	while (map)
 	{
+		write (1, map->line, ft_strlen(map->line));
 		map = map->next;
 	}
 }
@@ -66,7 +67,7 @@ int	check_valid_map(int fd)
 	}
 	if (readed)
 		free (readed);
-	if (check_help == 1)
+	if (check_help(map) == 1)
 		return (1);
 	 return (0);
 }
