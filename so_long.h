@@ -19,5 +19,7 @@ char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 void	*ft_memcpy(char *dst, char *src, size_t n);
 void	add_node(t_map **map, char *readed);
+int		ft_strcmp(char *s1, char *s2);
+int		is_wall_line(char *line);
 
 #endif
