@@ -4,17 +4,16 @@
 int print_error(char *str)
 {
     write(2, str, ft_strlen(str));
-    return (1);
+    return (-1);
 }
 
 int check_valid_file(char *file)
 {
     int len = ft_strlen(file);
     if (len < 4 || ft_strcmp(file + len - 4, ".ber") != 0)
-        return (1); // Invalid file extension
-    return (0); // Valid file extension
+        return (1);
+    return (0);
 }
-
 
 int find_elem(char *str, int *p, int *c, int *e)
 {
@@ -56,17 +55,18 @@ int check_help(t_map *map)
 {
     int p = 0, c = 0, e = 0, i =0;
 	char	*str;
-    int line_len = ft_strlen(map->line);
+    str = trim_newline(map->line);
+    int line_len = ft_strlen(str);
     while (map)
     {
-        if (ft_strlen(map->line) != line_len)
+		str = trim_newline(map->line);
+        if (ft_strlen(str) != line_len)
         {
 			printf("%d\n", i);
             write(2, "Error: Map is not rectangular\n", 30);
             return (1);
         }
-		str = trim_newline(map->line);
-        if (str[0] != '1' || str[ft_strlen(map->line) - 1] != '1')
+        if (str[0] != '1' || str[line_len - 1] != '1')
         {
             write(2, "Error: Map is not surrounded by walls\n", 38);
             return (1);
@@ -97,10 +97,9 @@ void free_map(t_map **map)
 	*map = NULL;
 }
 
-int check_valid_map(int fd)
+int check_valid_map(int fd, t_map **map)
 {
     char    *readed;
-    t_map   *map = NULL;
     t_map   *tmp = NULL;
     int     first_line = 1;
     int     line_len = 0;
@@ -118,26 +117,24 @@ int check_valid_map(int fd)
             }
             first_line = 0;
         }
-        add_node(&map, readed);
+        add_node(map, readed);
         readed = get_next_line(fd);
     }
-    if (!map)
+    if (!*map)
         return (1);
-    tmp = map;
+    tmp = *map;
     while (tmp->next)
         tmp = tmp->next;
     if (!is_wall_line(tmp->line))
     {
-        free_map(&map);
+        free_map(map);
         return (1);
     }
-    if (check_help(map) == 1)
+    if (check_help(*map) == 1)
     {
-        free_map(&map);
+        free_map(map);
         return (1);
     }
-
-    free_map(&map);
     return (0);
 }
 
@@ -145,26 +142,30 @@ int check_valid_map(int fd)
 int main(int argc, char **argv)
 {
     int fd;
-    int ret = 0;
-
+    t_map   *map;
+    
+    map = NULL;
     if (argc == 2)
     {
         if (check_valid_file(argv[1]))
-            ret = print_error("Error\nonly .ber files are valid\n");
+            return (print_error("Error\nonly .ber files are valid\n"));
         else
         {
             fd = open(argv[1], O_RDONLY);
             if (fd < 0)
-                ret = print_error("Error\nfile not found or permission denied\n");
+                return (print_error("Error\nfile not found or permission denied\n"));
             else
             {
-                if (check_valid_map(fd))
-                    ret = print_error("Error\ninvalid map\n");
+                if (check_valid_map(fd, &map))
+                    return (print_error("Error\ninvalid map\n"));
                 close(fd);
             }
+            // if (flood_fill())
+            //     return (print_error("can't play in this map"));
         }
     }
     else
-        ret = print_error("Error\nyou need only one argument\n");
-    return (ret);
+        return (print_error("Error\nyou need only one argument\n"));
+    free_map (&map);
+    return (0);
 }
