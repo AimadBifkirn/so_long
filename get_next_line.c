@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:25:02 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/16 11:00:27 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:41:00 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,20 +88,20 @@ char	*reset(char *reserv)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	char		*readed;
+	char		*read;
 
-	readed = NULL;
+	read = NULL;
 	if (fd < 0)
 		return (NULL);
 	line = NULL;
-	while (!ft_strchr(readed, '\n'))
+	while (!ft_strchr(read, '\n'))
 	{
 		line = get_read(fd);
 		if (!line)
 			break ;
-		readed = ft_strjoin(readed, line);
+		read = ft_strjoin(read, line);
 	}
-	if (!line && !readed)
+	if (!line && !read)
 		return (NULL);
-	return (readed);
+	return (read);
 }

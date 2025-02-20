@@ -54,24 +54,22 @@ char	*trim_newline(char *line)
 int check_help(t_map *map)
 {
     int p = 0, c = 0, e = 0, i =0;
-	char	*str;
-    str = trim_newline(map->line);
-    int line_len = ft_strlen(str);
+
+    int line_len = ft_strlen(map->line);
     while (map)
     {
-		str = trim_newline(map->line);
-        if (ft_strlen(str) != line_len)
+        if (ft_strlen(map->line) != line_len)
         {
 			printf("%d\n", i);
             write(2, "Error: Map is not rectangular\n", 30);
             return (1);
         }
-        if (str[0] != '1' || str[line_len - 1] != '1')
+        if (map->line[0] != '1' || map->line[line_len - 1] != '1')
         {
             write(2, "Error: Map is not surrounded by walls\n", 38);
             return (1);
         }
-        if (find_elem(str, &p, &c, &e))
+        if (find_elem(map->line, &p, &c, &e))
             return (1);
         map = map->next;
 		i++;
@@ -101,15 +99,14 @@ int check_valid_map(int fd, t_map **map)
 {
     char    *readed;
     t_map   *tmp = NULL;
+    char    *str;
     int     first_line = 1;
-    int     line_len = 0;
 
     readed = get_next_line(fd);
     while (readed)
     {
         if (first_line)
         {
-            line_len = ft_strlen(readed);
             if (!is_wall_line(readed))
             {
                 free(readed);
@@ -117,7 +114,8 @@ int check_valid_map(int fd, t_map **map)
             }
             first_line = 0;
         }
-        add_node(map, readed);
+        str = trim_newline(readed);
+        add_node(map, str);
         readed = get_next_line(fd);
     }
     if (!*map)
