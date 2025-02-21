@@ -1,8 +1,15 @@
 #include "so_long.h"
 #include <stdio.h>
 
-int print_error(char *str)
+int print_error(char *str, t_general **general)
 {
+    if (general && *general)
+    {
+        if ((*general)->map)
+            free_map(&(*general)->map);
+        if ((*general)->copy_map)
+            free_table((*general)->copy_map);
+    }
     write(2, str, ft_strlen(str));
     return (-1);
 }
@@ -95,44 +102,24 @@ void free_map(t_map **map)
 	*map = NULL;
 }
 
-int check_valid_map(int fd, t_map **map)
+int check_valid_map(int fd, t_map *map)
 {
-    char    *readed;
-    t_map   *tmp = NULL;
-    char    *str;
-    int     first_line = 1;
-
-    readed = get_next_line(fd);
-    while (readed)
+    int     first_line;
+    
+    first_line = 1;
+    while (map->next)
     {
         if (first_line)
         {
-            if (!is_wall_line(readed))
-            {
-                free(readed);
+            if (!is_wall_line(map->line))
                 return (1);
-            }
             first_line = 0;
         }
-        str = trim_newline(readed);
-        add_node(map, str);
-        readed = get_next_line(fd);
     }
-    if (!*map)
+    if (!is_wall_line(map->line))
         return (1);
-    tmp = *map;
-    while (tmp->next)
-        tmp = tmp->next;
-    if (!is_wall_line(tmp->line))
-    {
-        free_map(map);
-        return (1);
-    }
     if (check_help(*map) == 1)
-    {
-        free_map(map);
         return (1);
-    }
     return (0);
 }
 
@@ -140,30 +127,31 @@ int check_valid_map(int fd, t_map **map)
 int main(int argc, char **argv)
 {
     int fd;
-    t_map   *map;
+    t_general  *general;
     
-    map = NULL;
+    general = NULL;
     if (argc == 2)
     {
         if (check_valid_file(argv[1]))
-            return (print_error("Error\nonly .ber files are valid\n"));
+            return (print_error("Error\nonly .ber files are valid\n", &general));
         else
         {
             fd = open(argv[1], O_RDONLY);
             if (fd < 0)
-                return (print_error("Error\nfile not found or permission denied\n"));
+                return (print_error("Error\nfile not found or permission denied\n", &general));
             else
             {
-                if (check_valid_map(fd, &map))
-                    return (print_error("Error\ninvalid map\n"));
+                initalize_struct(&general);
+                if (check_valid_map(fd, general->map))
+                    return (print_error("Error\ninvalid map\n", &general));
                 close(fd);
             }
-            // if (flood_fill())
-            //     return (print_error("can't play in this map"));
+            if (flood_fill(general->copy_map, general->x, general->y))
+                return (print_error("can't play in this map", &general));
         }
     }
     else
-        return (print_error("Error\nyou need only one argument\n"));
+        return (print_error("Error\nyou need only one argument\n", &general));
     free_map (&map);
     return (0);
 }
