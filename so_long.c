@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:38:49 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/22 12:24:11 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/22 19:37:25 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,13 @@ int	rectangle_walls_check(char *str, int len)
 	return (0);
 }
 
-void	free_map(t_map **map)
+void	check_argc(int argc)
 {
-	t_map	*tmp;
-
-	while (*map)
+	if (argc != 2)
 	{
-		tmp = *map;
-		*map = (*map)->next;
-		free(tmp->line);
-		free(tmp);
+		write (1, "Error\nyou need only one argument\n", 33);
+		exit (1);
 	}
-	*map = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -79,22 +74,21 @@ int	main(int argc, char **argv)
 	general = malloc(sizeof(t_general));
 	if (!general)
 		return (print_error("malloc failed\n", &general));
-	if (argc == 2)
-	{
-		if (check_valid_file(argv[1]))
-			return (print_error("Error\nuse a '.ber' file\n", &general));
-		fd = open(argv[1], O_RDONLY);
-		if (fd < 0)
-			return (print_error("Error\nopen() failed\n", &general));
-		initialize_struct(&general, fd);
-		check_valid_map(fd, &general);
-		close(fd);
-		flood_fill(general, general->copy_map, general->x, general->y);
-		if (check_result(general->copy_map))
-			return (print_error("Error\ncan't play in this map\n", &general));
-	}
-	else
-		return (print_error("Error\nyou need only one argument\n", &general));
+	check_argc(argc);
+	if (check_valid_file(argv[1]))
+		return (print_error("Error\nuse a '.ber' file\n", &general));
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (print_error("Error\nopen() failed\n", &general));
+	initialize_struct(&general, fd);
+	check_valid_map(fd, &general);
+	close(fd);
+	flood_fill(general, general->copy_map, general->x, general->y);
+	if (check_result(general->copy_map))
+		return (print_error("Error\ncan't play in this map\n", &general));
+	general->mlx = mlx_init();
+	general->window = mlx_new_window(general->mlx, 1000, 600, "so_long");
+	mlx_loop(general->mlx);
 	free_struct(&general);
 	return (0);
 }

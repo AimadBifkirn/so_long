@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/22 11:24:51 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/22 19:32:13 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct so_long
 	int			y;
 	int			lenght;
 	int			width;
+	void		*mlx;
+	void		*window;
 }	t_general;
 
 typedef struct map
@@ -54,5 +56,6 @@ int		check_valid_map(int fd, t_general **general);
 int		check_valid_file(char *file);
 int		check_result(char **str);
 int		rectangle_walls_check(char *str, int len);
+void	free_map(t_map **map);
 
 #endif

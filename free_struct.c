@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:57:47 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/22 10:57:59 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/22 19:19:00 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,18 @@ void	free_table(char **table)
 	}
 	free(table);
 	table = NULL;
+}
+
+void	free_map(t_map **map)
+{
+	t_map	*tmp;
+
+	while (*map)
+	{
+		tmp = *map;
+		*map = (*map)->next;
+		free(tmp->line);
+		free(tmp);
+	}
+	*map = NULL;
 }
