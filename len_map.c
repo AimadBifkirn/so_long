@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_wall_line.c                                     :+:      :+:    :+:   */
+/*   len_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/22 11:21:36 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/22 12:19:15 by abifkirn         ###   ########.fr       */
+/*   Created: 2025/01/28 17:41:29 by abifkirn          #+#    #+#             */
+/*   Updated: 2025/02/22 10:57:32 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_wall_line(char *line)
+int	len_map(t_map **map)
 {
-	int	i;
+	int		i;
+	t_map	*tmp;
 
 	i = 0;
-	if (line[i] == '\0')
-		return (1);
-	while (line[i])
+	tmp = *map;
+	while (tmp)
 	{
-		if (line[i] != '1')
-			return (1);
 		i++;
+		tmp = tmp->next;
 	}
-	return (0);
+	return (i);
 }

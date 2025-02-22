@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   len_stack.c                                        :+:      :+:    :+:   */
+/*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 17:41:29 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/21 21:24:24 by abifkirn         ###   ########.fr       */
+/*   Created: 2025/02/22 10:57:47 by abifkirn          #+#    #+#             */
+/*   Updated: 2025/02/22 10:57:59 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	len_map(t_map **map)
+void	free_struct(t_general **general)
 {
-	int		i;
-	t_map	*tmp;
+	if (*general)
+	{
+		if ((*general)->map)
+			free_map(&(*general)->map);
+		if ((*general)->copy_map)
+			free((*general)->copy_map);
+		free (*general);
+		*general = NULL;
+	}
+}
+
+void	free_table(char **table)
+{
+	int	i;
 
 	i = 0;
-	tmp = *map;
-	while (tmp)
+	while (table[i])
 	{
+		free(table[i]);
 		i++;
-		tmp = tmp->next;
 	}
-	return (i);
+	free(table);
+	table = NULL;
 }

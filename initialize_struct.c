@@ -1,35 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialize_struct.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/22 11:00:32 by abifkirn          #+#    #+#             */
+/*   Updated: 2025/02/22 11:59:19 by abifkirn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
-#include <stdio.h>
 
-void general_initialize_map(t_general **general, int fd)
+int	general_initialize_map(t_general **general, int fd)
 {
-    char    *read;
+	char	*read;
 
-    (*general)->map = NULL;
-    read = get_next_line(fd);
-    while (read)
-    {
-        add_node(&(*general)->map, trim_newline(read));
-        read = get_next_line(fd);
-    }
+	(*general)->map = NULL;
+	read = get_next_line(fd);
+	while (read)
+	{
+		add_node(&(*general)->map, trim_newline(read));
+		read = get_next_line(fd);
+	}
+	if ((*general)->map == NULL)
+		return (1);
+	return (0);
 }
 
-void general_initialize_coyp_map(t_general **general)
+void	general_initialize_coyp_map(t_general **general)
 {
-    t_map   *map;
-    int     i;
+	t_map	*map;
+	int		i;
+	int		len;
 
 	i = 0;
-    (*general)->copy_map = malloc (sizeof(char *) * len_map(&((*general)->map)) + 1);
+	len = len_map(&((*general)->map));
+	(*general)->copy_map = malloc(sizeof(char *) * (len + 1));
 	if (!(*general)->copy_map)
 		exit (print_error("malloc failled", general));
-    map = (*general)->map;
-    while (map)
-    {
-        (*general)->copy_map[i] = map->line;
-        map = map->next;
+	map = (*general)->map;
+	while (map)
+	{
+		(*general)->copy_map[i] = map->line;
+		map = map->next;
 		i++;
-    }
+	}
 	(*general)->copy_map[i] = NULL;
 }
 
@@ -56,18 +72,25 @@ void	lenght_width(t_general **general)
 {
 	char	**str;
 	int		width;
+	int		i;
 
 	width = 0;
+	i = 0;
 	str = (*general)->copy_map;
 	(*general)->lenght = len_map(&(*general)->map);
-	while (str[width])
-		width++;
+	while (str[i] && i < 1)
+	{
+		while (str[i][width])
+			width++;
+		i++;
+	}
 	(*general)->width = width;
 }
 
-void initialize_struct(t_general **general, int fd)
+void	initialize_struct(t_general **general, int fd)
 {
-	general_initialize_map(general, fd);
+	if (general_initialize_map(general, fd))
+		exit (print_error("Error\nmap is empthy\n", general));
 	general_initialize_coyp_map(general);
 	start_position(general);
 	lenght_width(general);
