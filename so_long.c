@@ -8,7 +8,12 @@ int print_error(char *str, t_general **general)
         if ((*general)->map)
             free_map(&(*general)->map);
         if ((*general)->copy_map)
-            free_table((*general)->copy_map);
+        {
+            free((*general)->copy_map);
+            (*general)->copy_map;
+        }
+        free (*general);
+        *general = NULL;
     }
     write(2, str, ft_strlen(str));
     return (-1);
@@ -22,6 +27,16 @@ int check_valid_file(char *file)
     return (0);
 }
 
+char	*trim_newline(char *line)
+{
+    int len = ft_strlen(line);
+    if (len > 0 && line[len - 1] == '\n')
+    {
+        line[len - 1] = '\0';
+    }
+    return (line);
+}
+
 int find_elem(char *str, int *p, int *c, int *e)
 {
     int i;
@@ -31,30 +46,19 @@ int find_elem(char *str, int *p, int *c, int *e)
     {
         if (str[i] == 'P')
             (*p)++;
-        else if (str[i] == 'C')
+        if (str[i] == 'C')
             (*c)++;
-        else if (str[i] == 'E')
+        if (str[i] == 'E')
             (*e)++;
-        else if (str[i] == '1' || str[i] == '0')
-            ;
-        else
-        {
+        if (!(str[i] == '1' || str[i] == '0'))
+        {           
             printf("Error: Invalid character '%c' found in map\n", str[i]);
             return (1);
         }
         i++;
+        printf("p: %d, e: %d, c: %d\n", *p, *e, *c);
     }
     return (0);
-}
-
-char	*trim_newline(char *line)
-{
-    int len = ft_strlen(line);
-    if (len > 0 && line[len - 1] == '\n')
-    {
-        line[len - 1] = '\0';
-    }
-    return (line);
 }
 
 
@@ -115,21 +119,26 @@ int check_valid_map(int fd, t_map *map)
                 return (1);
             first_line = 0;
         }
+        map = map->next;
     }
     if (!is_wall_line(map->line))
         return (1);
-    if (check_help(*map) == 1)
+    if (check_help(map) == 1)
         return (1);
     return (0);
 }
 
+// just for testing
+// void    print_arry()
 
 int main(int argc, char **argv)
 {
     int fd;
     t_general  *general;
     
-    general = NULL;
+    general = malloc(sizeof(t_general));
+    if (!general)
+        return (print_error("Memory allocation failed\n", &general));
     if (argc == 2)
     {
         if (check_valid_file(argv[1]))
@@ -141,17 +150,16 @@ int main(int argc, char **argv)
                 return (print_error("Error\nfile not found or permission denied\n", &general));
             else
             {
-                initalize_struct(&general);
+                initialize_struct(&general, fd);
                 if (check_valid_map(fd, general->map))
                     return (print_error("Error\ninvalid map\n", &general));
                 close(fd);
             }
-            if (flood_fill(general->copy_map, general->x, general->y))
-                return (print_error("can't play in this map", &general));
+            flood_fill(general ,general->copy_map, general->x, general->y);
         }
     }
     else
         return (print_error("Error\nyou need only one argument\n", &general));
-    free_map (&map);
+    // free_map (&map);
     return (0);
 }

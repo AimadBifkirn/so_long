@@ -9,7 +9,7 @@
 
 typedef struct so_long
 {
-	t_map 	*map;
+	struct map 	*map;
 	char	**copy_map;
 	int		x;
 	int		y;
@@ -36,6 +36,9 @@ int		is_wall_line(char *line);
 void	free_map(t_map **map);
 void	free_table(char **table);
 void	initialize_struct(t_general **general, int fd);
-int	flood_fill(char **str, int x, int y);
+void	flood_fill(t_general *general ,char **str, int x, int y);
+char	*trim_newline(char *line);
+int		len_map(t_map **map);
+int		print_error(char *str, t_general **general);
 
 #endif
