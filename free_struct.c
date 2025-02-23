@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:57:47 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/23 13:07:38 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/23 15:33:56 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@ void	free_struct(t_general **general)
 			free_map(&(*general)->map);
 		if ((*general)->copy_map)
 			free_table((*general)->copy_map);
+		if ((*general)->wall)
+			mlx_destroy_image((*general)->mlx, (*general)->wall);
+		if ((*general)->player)
+			mlx_destroy_image((*general)->mlx, (*general)->player);
+			if ((*general)->background)
+			mlx_destroy_image((*general)->mlx, (*general)->background);
+		if ((*general)->window)
+			mlx_destroy_window((*general)->mlx, (*general)->window);
+		if ((*general)->mlx)
+		{
+			mlx_destroy_display((*general)->mlx);
+			free ((*general)->mlx);
+		}
 		free (*general);
 		*general = NULL;
 	}

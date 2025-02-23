@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/23 13:19:18 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/23 15:29:31 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct so_long
 	void		*mlx;
 	void		*window;
 	void		*wall;
-	int			wall_width;
-	int			wall_lenght;
+	void		*player;
+	void		*background;
 }	t_general;
 
 typedef struct map

@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:00:32 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/23 13:19:51 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/23 15:33:21 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,15 @@ void	lenght_width(t_general **general)
 	(*general)->width = width;
 }
 
+void	allocate_imags(t_general **general)
+{
+	int	lenght;
+	int	width;
+	(*general)->wall = mlx_xpm_file_to_image((*general)->mlx, "./imags/wall.xpm", &width, &lenght);
+	(*general)->player = mlx_xpm_file_to_image((*general)->mlx, "./imags/player.xpm", &width, &lenght);
+	(*general)->background = mlx_xpm_file_to_image((*general)->mlx, "./imags/background.xpm", &width, &lenght);
+}
+
 void	initialize_struct(t_general **general, int fd)
 {
 	if (general_initialize_map(general, fd))
@@ -96,5 +105,5 @@ void	initialize_struct(t_general **general, int fd)
 	lenght_width(general);
 	(*general)->mlx = mlx_init();
 	(*general)->window = mlx_new_window((*general)->mlx, (*general)->width * 48, (*general)->lenght * 48, "so_long");
-	(*general)->wall = mlx_xpm_file_to_image((*general)->mlx, "./imags/wall.xpm", &(*general)->wall_width, &(*general)->wall_lenght);
+	allocate_imags(general);
 }
