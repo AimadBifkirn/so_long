@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:00:32 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/22 11:59:19 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:19:51 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	general_initialize_coyp_map(t_general **general)
 	map = (*general)->map;
 	while (map)
 	{
-		(*general)->copy_map[i] = map->line;
+		(*general)->copy_map[i] = ft_strcpy((*general)->copy_map[i], map->line);
 		map = map->next;
 		i++;
 	}
@@ -94,4 +94,7 @@ void	initialize_struct(t_general **general, int fd)
 	general_initialize_coyp_map(general);
 	start_position(general);
 	lenght_width(general);
+	(*general)->mlx = mlx_init();
+	(*general)->window = mlx_new_window((*general)->mlx, (*general)->width * 48, (*general)->lenght * 48, "so_long");
+	(*general)->wall = mlx_xpm_file_to_image((*general)->mlx, "./imags/wall.xpm", &(*general)->wall_width, &(*general)->wall_lenght);
 }

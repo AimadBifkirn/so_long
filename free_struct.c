@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:57:47 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/22 19:19:00 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:07:38 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_struct(t_general **general)
 		if ((*general)->map)
 			free_map(&(*general)->map);
 		if ((*general)->copy_map)
-			free((*general)->copy_map);
+			free_table((*general)->copy_map);
 		free (*general);
 		*general = NULL;
 	}

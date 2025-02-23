@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:38:49 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/22 19:37:25 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/23 09:55:54 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ int	main(int argc, char **argv)
 	flood_fill(general, general->copy_map, general->x, general->y);
 	if (check_result(general->copy_map))
 		return (print_error("Error\ncan't play in this map\n", &general));
-	general->mlx = mlx_init();
-	general->window = mlx_new_window(general->mlx, 1000, 600, "so_long");
-	mlx_loop(general->mlx);
+	window_work(&general);
 	free_struct(&general);
 	return (0);
 }
