@@ -6,11 +6,27 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:57:47 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/23 15:33:56 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:19:16 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_images(t_general **general)
+{
+	if ((*general)->wall)
+			mlx_destroy_image((*general)->mlx, (*general)->wall);
+	if ((*general)->player_w)
+		mlx_destroy_image((*general)->mlx, (*general)->player_w);
+	if ((*general)->player_l)
+		mlx_destroy_image((*general)->mlx, (*general)->player_l);
+	if ((*general)->player_f)
+		mlx_destroy_image((*general)->mlx, (*general)->player_f);
+	if ((*general)->player_b)
+		mlx_destroy_image((*general)->mlx, (*general)->player_b);
+	if ((*general)->background)
+		mlx_destroy_image((*general)->mlx, (*general)->background);
+}
 
 void	free_struct(t_general **general)
 {
@@ -20,12 +36,6 @@ void	free_struct(t_general **general)
 			free_map(&(*general)->map);
 		if ((*general)->copy_map)
 			free_table((*general)->copy_map);
-		if ((*general)->wall)
-			mlx_destroy_image((*general)->mlx, (*general)->wall);
-		if ((*general)->player)
-			mlx_destroy_image((*general)->mlx, (*general)->player);
-			if ((*general)->background)
-			mlx_destroy_image((*general)->mlx, (*general)->background);
 		if ((*general)->window)
 			mlx_destroy_window((*general)->mlx, (*general)->window);
 		if ((*general)->mlx)

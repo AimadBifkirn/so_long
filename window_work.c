@@ -45,28 +45,27 @@ void	update_player_pos(t_general **general, int key)
 	if (key == 'd')
 	{
 		(*general)->x++;
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player, (*general)->x * 48, (*general)->y * 48);
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w, (*general)->x * 48, (*general)->y * 48);
 	}
 	else if (key == 'a')
 	{
 		(*general)->x--;
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player, (*general)->x * 48, (*general)->y * 48);
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_l, (*general)->x * 48, (*general)->y * 48);
 	}
 	else if (key == 'w')
 	{
 		(*general)->y--;
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player, (*general)->x * 48, (*general)->y * 48);
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_b, (*general)->x * 48, (*general)->y * 48);
 	}
 	else if (key == 's')
 	{
 		(*general)->y++;
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player, (*general)->x * 48, (*general)->y * 48);
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_f, (*general)->x * 48, (*general)->y * 48);
 	}
 }
 
 int	handel_keys(int key, t_general **general)
 {
-	printf("%d\n", key);
 	if (key == 65307)
 	{
 		free_struct(general);
@@ -94,7 +93,7 @@ void	put_walls(t_general **general)
 			if (tmp->line[x] != '1')
 				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, x * 48, y * 48);
 			if (tmp->line[x] == 'P')
-				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player, x * 48, y * 48);
+				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w, x * 48, y * 48);
 			x++;
 		}
 		tmp = tmp->next;
@@ -104,6 +103,9 @@ void	put_walls(t_general **general)
 
 void	window_work(t_general **general)
 {
+	(*general)->mlx = mlx_init();
+	(*general)->window = mlx_new_window((*general)->mlx, (*general)->width * 48, (*general)->lenght * 48, "so_long");
+	allocate_imags(general);
 	put_walls(general);
 	mlx_key_hook((*general)->window, handel_keys, general);
 	mlx_loop((*general)->mlx);

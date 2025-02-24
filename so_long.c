@@ -6,11 +6,12 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:38:49 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/23 09:55:54 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:32:30 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <stdio.h>
 
 int	print_error(char *str, t_general **general)
 {
@@ -83,9 +84,10 @@ int	main(int argc, char **argv)
 	initialize_struct(&general, fd);
 	check_valid_map(fd, &general);
 	close(fd);
-	flood_fill(general, general->copy_map, general->x, general->y);
+	flood_fill(general, general->copy_map, general->y, general->x);
 	if (check_result(general->copy_map))
 		return (print_error("Error\ncan't play in this map\n", &general));
+	printf ("%d\t%d\n", general->x, general->y);
 	window_work(&general);
 	free_struct(&general);
 	return (0);

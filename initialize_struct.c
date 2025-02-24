@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:00:32 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/23 15:33:21 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:26:40 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ void	start_position(t_general **general)
 	char	**str;
 
 	str = (*general)->copy_map;
-	(*general)->x = 0;
+	(*general)->y = 0;
 	while (str[(*general)->x])
 	{
-		(*general)->y = 0;
-		while (str[(*general)->x][(*general)->y])
+		(*general)->x = 0;
+		while (str[(*general)->y][(*general)->x])
 		{
-			if (str[(*general)->x][(*general)->y] == 'P')
+			if (str[(*general)->y][(*general)->x] == 'P')
 				return ;
-			(*general)->y++;
+			(*general)->x++;
 		}
-		(*general)->x++;
+		(*general)->y++;
 	}
 }
 
@@ -92,7 +92,10 @@ void	allocate_imags(t_general **general)
 	int	lenght;
 	int	width;
 	(*general)->wall = mlx_xpm_file_to_image((*general)->mlx, "./imags/wall.xpm", &width, &lenght);
-	(*general)->player = mlx_xpm_file_to_image((*general)->mlx, "./imags/player.xpm", &width, &lenght);
+	(*general)->player_w = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_w.xpm", &width, &lenght);
+	(*general)->player_l = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_l.xpm", &width, &lenght);
+	(*general)->player_f = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_f.xpm", &width, &lenght);
+	(*general)->player_b = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_b.xpm", &width, &lenght);
 	(*general)->background = mlx_xpm_file_to_image((*general)->mlx, "./imags/background.xpm", &width, &lenght);
 }
 
@@ -103,7 +106,4 @@ void	initialize_struct(t_general **general, int fd)
 	general_initialize_coyp_map(general);
 	start_position(general);
 	lenght_width(general);
-	(*general)->mlx = mlx_init();
-	(*general)->window = mlx_new_window((*general)->mlx, (*general)->width * 48, (*general)->lenght * 48, "so_long");
-	allocate_imags(general);
 }

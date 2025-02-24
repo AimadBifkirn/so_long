@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/23 15:29:31 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:27:31 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ typedef struct so_long
 	void		*mlx;
 	void		*window;
 	void		*wall;
-	void		*player;
+	void		*player_w;
+	void		*player_l;
+	void		*player_f;
+	void		*player_b;
 	void		*background;
 }	t_general;
 
@@ -62,5 +65,6 @@ int		rectangle_walls_check(char *str, int len);
 void	free_map(t_map **map);
 void	window_work(t_general **general);
 char	*ft_strcpy(char *dest, char *src);
+void	allocate_imags(t_general **general);
 
 #endif
