@@ -37,45 +37,46 @@ int	check_next_move(t_general **general, char c)
 	return (0);
 }
 
-void	update_frame(t_general **general, int i)
+void	update_frame(t_general **general, int i, int key)
 {
 	(*general)->frame++;
 	if ((*general)->frame == 3)
 		(*general)->frame = 0;
-	mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, (*general)->x * 48, (*general)->y * 48);
-	if (i == 0)
-		(*general)->x++;
-	else if (i == 1)
-		(*general)->x--;
-	else if (i == 2)
-		(*general)->y--;
-	else if (i == 3)
-		(*general)->y++;
+	if (!check_next_move(general, key))
+	{
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, (*general)->x * 48, (*general)->y * 48);
+		if (i == 0)
+			(*general)->x++;
+		else if (i == 1)
+			(*general)->x--;
+		else if (i == 2)
+			(*general)->y--;
+		else if (i == 3)
+			(*general)->y++;
+	}
 }
 
 void	update_player_pos(t_general **general, int key)
 {
-	if (check_next_move(general, key))
-		return ;
 	mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, (*general)->x * 48, (*general)->y * 48);
 	if (key == 'd')
 	{
-		update_frame(general, 0);
+		update_frame(general, 0, key);
 		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
 	}
 	else if (key == 'a')
 	{
-		update_frame(general, 1);
+		update_frame(general, 1, key);
 		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_l[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
 	}
 	else if (key == 'w')
 	{
-		update_frame(general, 2);
+		update_frame(general, 2, key);
 		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_b[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
 	}
 	else if (key == 's')
 	{
-		update_frame(general, 3);
+		update_frame(general, 3, key);
 		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_f[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
 	}
 }
@@ -118,12 +119,14 @@ void	put_walls(t_general **general)
 	}
 }
 
-void	window_work(t_general **general)
+int	window_work(t_general **general)
 {
 	(*general)->mlx = mlx_init();
 	(*general)->window = mlx_new_window((*general)->mlx, (*general)->width * 48, (*general)->lenght * 48, "so_long");
-	allocate_imags(general);
+	if (allocate_imags(general))
+		return(1);
 	put_walls(general);
 	mlx_key_hook((*general)->window, handel_keys, general);
 	mlx_loop((*general)->mlx);
+	return (0);
 }

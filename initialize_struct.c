@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:00:32 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/25 12:24:22 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:29:28 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	start_position(t_general **general)
 
 	str = (*general)->copy_map;
 	(*general)->y = 0;
-	while (str[(*general)->x])
+	while (str[(*general)->y])
 	{
 		(*general)->x = 0;
 		while (str[(*general)->y][(*general)->x])
@@ -87,7 +87,7 @@ void	lenght_width(t_general **general)
 	(*general)->width = width;
 }
 
-void	allocate_imags(t_general **general)
+int	allocate_imags(t_general **general)
 {
 	int	lenght;
 	int	width;
@@ -99,12 +99,17 @@ void	allocate_imags(t_general **general)
 	(*general)->player_f[1] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_f2.xpm", &width, &lenght);
 	(*general)->player_f[2] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_f3.xpm", &width, &lenght);
 	(*general)->player_w[0] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_w.xpm", &width, &lenght);
-	(*general)->player_w[1] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_w1.xpm", &width, &lenght);
-	(*general)->player_w[2] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_w2.xpm", &width, &lenght);
+	(*general)->player_w[1] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_w2.xpm", &width, &lenght);
+	(*general)->player_w[2] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_w3.xpm", &width, &lenght);
 	(*general)->player_b[0] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_b.xpm", &width, &lenght);
 	(*general)->player_b[1] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_b2.xpm", &width, &lenght);
 	(*general)->player_b[2] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_b3.xpm", &width, &lenght);
 	(*general)->background = mlx_xpm_file_to_image((*general)->mlx, "./imags/background.xpm", &width, &lenght);
+	if (!(*general)->player_b[0] || !(*general)->player_b[1] || !(*general)->player_b[2] || !(*general)->player_w[0]
+		|| !(*general)->player_w[1] || !(*general)->player_w[2] || !(*general)->player_f[0] || !(*general)->player_f[1]
+		|| !(*general)->player_f[2] || !(*general)->player_l[0] || !(*general)->player_l[1] || !(*general)->player_l[2])
+		return (1);
+	return (0);
 }
 
 void	initialize_struct(t_general **general, int fd)

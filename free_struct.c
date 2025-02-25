@@ -6,24 +6,45 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:57:47 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/24 17:19:16 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:41:55 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_images(t_general **general)
+void	free_images_helper(t_general **general)
 {
 	if ((*general)->wall)
-			mlx_destroy_image((*general)->mlx, (*general)->wall);
-	if ((*general)->player_w)
-		mlx_destroy_image((*general)->mlx, (*general)->player_w);
-	if ((*general)->player_l)
-		mlx_destroy_image((*general)->mlx, (*general)->player_l);
-	if ((*general)->player_f)
-		mlx_destroy_image((*general)->mlx, (*general)->player_f);
-	if ((*general)->player_b)
-		mlx_destroy_image((*general)->mlx, (*general)->player_b);
+		mlx_destroy_image((*general)->mlx, (*general)->wall);
+	if ((*general)->player_w[0])
+		mlx_destroy_image((*general)->mlx, (*general)->player_w[0]);
+	if ((*general)->player_w[1])
+		mlx_destroy_image((*general)->mlx, (*general)->player_w[1]);
+	if ((*general)->player_w[2])
+		mlx_destroy_image((*general)->mlx, (*general)->player_w[2]);
+	if ((*general)->player_l[0])
+		mlx_destroy_image((*general)->mlx, (*general)->player_l[0]);
+	if ((*general)->player_l[1])
+		mlx_destroy_image((*general)->mlx, (*general)->player_l[1]);
+	if ((*general)->player_l[2])
+		mlx_destroy_image((*general)->mlx, (*general)->player_l[2]);
+	if ((*general)->player_f[0])
+		mlx_destroy_image((*general)->mlx, (*general)->player_f[0]);
+	if ((*general)->player_f[1])
+		mlx_destroy_image((*general)->mlx, (*general)->player_f[1]);
+	if ((*general)->player_f[2])
+		mlx_destroy_image((*general)->mlx, (*general)->player_f[2]);
+}
+
+void	free_images(t_general **general)
+{
+	free_images_helper(general);
+	if ((*general)->player_b[0])
+	mlx_destroy_image((*general)->mlx, (*general)->player_b[0]);
+	if ((*general)->player_b[1])
+		mlx_destroy_image((*general)->mlx, (*general)->player_b[1]);
+	if ((*general)->player_b[2])
+		mlx_destroy_image((*general)->mlx, (*general)->player_b[2]);
 	if ((*general)->background)
 		mlx_destroy_image((*general)->mlx, (*general)->background);
 }
@@ -36,6 +57,7 @@ void	free_struct(t_general **general)
 			free_map(&(*general)->map);
 		if ((*general)->copy_map)
 			free_table((*general)->copy_map);
+		free_images(general);
 		if ((*general)->window)
 			mlx_destroy_window((*general)->mlx, (*general)->window);
 		if ((*general)->mlx)

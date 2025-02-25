@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:38:49 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/24 21:36:08 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:22:37 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int	main(int argc, char **argv)
 	flood_fill(general, general->copy_map, general->y, general->x);
 	if (check_result(general->copy_map))
 		return (print_error("Error\ncan't play in this map\n", &general));
-	window_work(&general);
+	if (window_work(&general))
+		return(print_error("Error\nhave you changed the imags !!", &general));
 	free_struct(&general);
 	return (0);
 }

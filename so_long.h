@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/25 12:22:09 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:23:10 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int		check_valid_file(char *file);
 int		check_result(char **str);
 int		rectangle_walls_check(char *str, int len);
 void	free_map(t_map **map);
-void	window_work(t_general **general);
+int		window_work(t_general **general);
 char	*ft_strcpy(char *dest, char *src);
-void	allocate_imags(t_general **general);
+int		allocate_imags(t_general **general);
 
 #endif
