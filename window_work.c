@@ -37,6 +37,22 @@ int	check_next_move(t_general **general, char c)
 	return (0);
 }
 
+void	update_frame(t_general **general, int i)
+{
+	(*general)->frame++;
+	if ((*general)->frame == 3)
+		(*general)->frame = 0;
+	mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, (*general)->x * 48, (*general)->y * 48);
+	if (i == 0)
+		(*general)->x++;
+	else if (i == 1)
+		(*general)->x--;
+	else if (i == 2)
+		(*general)->y--;
+	else if (i == 3)
+		(*general)->y++;
+}
+
 void	update_player_pos(t_general **general, int key)
 {
 	if (check_next_move(general, key))
@@ -44,23 +60,23 @@ void	update_player_pos(t_general **general, int key)
 	mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, (*general)->x * 48, (*general)->y * 48);
 	if (key == 'd')
 	{
-		(*general)->x++;
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w, (*general)->x * 48, (*general)->y * 48);
+		update_frame(general, 0);
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
 	}
 	else if (key == 'a')
 	{
-		(*general)->x--;
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_l, (*general)->x * 48, (*general)->y * 48);
+		update_frame(general, 1);
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_l[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
 	}
 	else if (key == 'w')
 	{
-		(*general)->y--;
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_b, (*general)->x * 48, (*general)->y * 48);
+		update_frame(general, 2);
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_b[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
 	}
 	else if (key == 's')
 	{
-		(*general)->y++;
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_f, (*general)->x * 48, (*general)->y * 48);
+		update_frame(general, 3);
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_f[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
 	}
 }
 
@@ -71,7 +87,8 @@ int	handel_keys(int key, t_general **general)
 		free_struct(general);
 		exit (0);
 	}
-	update_player_pos(general, key);
+	if (key == 'w' || key == 'a' || key == 's' || key == 'd')
+		update_player_pos(general, key);
 	return (0);
 }
 
@@ -93,7 +110,7 @@ void	put_walls(t_general **general)
 			if (tmp->line[x] != '1')
 				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, x * 48, y * 48);
 			if (tmp->line[x] == 'P')
-				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w, x * 48, y * 48);
+				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w[0], x * 48, y * 48);
 			x++;
 		}
 		tmp = tmp->next;
