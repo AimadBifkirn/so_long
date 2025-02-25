@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:00:32 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/25 14:29:28 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:45:01 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,12 @@ int	allocate_imags(t_general **general)
 
 void	initialize_struct(t_general **general, int fd)
 {
+	(*general) = malloc(sizeof(t_general));
+	if (!(*general))
+	{
+		ft_putstr_fd("Erro\nmalloc failed\n", 2);
+		exit (1);	
+	}
 	if (general_initialize_map(general, fd))
 		exit (print_error("Error\nmap is empthy\n", general));
 	general_initialize_coyp_map(general);

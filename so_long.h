@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/25 14:23:10 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:31:15 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,13 @@ int		len_map(t_map **map);
 int		print_error(char *str, t_general **general);
 void	free_struct(t_general **general);
 int		check_valid_map(int fd, t_general **general);
-int		check_valid_file(char *file);
+void	check_valid_file(char *file);
 int		check_result(char **str);
 int		rectangle_walls_check(char *str, int len);
 void	free_map(t_map **map);
 int		window_work(t_general **general);
 char	*ft_strcpy(char *dest, char *src);
 int		allocate_imags(t_general **general);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:54:44 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/22 12:38:47 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:53:01 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ int	check_result(char **str)
 	return (0);
 }
 
-int	check_valid_file(char *file)
+void	check_valid_file(char *file)
 {
 	int	len;
 
 	len = ft_strlen(file);
 	if (len < 4 || ft_strcmp(file + len - 4, ".ber") != 0)
-		return (1);
-	return (0);
+	{
+		write (2, "Error\nuse a '.ber' file\n", 25);
+		exit (1);
+	}
 }
 
 int	find_elem(char *str, int *p, int *c, int *e)
@@ -104,20 +106,20 @@ int	check_valid_map(int fd, t_general **general)
 	tmp = (*general)->map;
 	first_line = 1;
 	if (len_map(&(*general)->map) < 3)
-		exit (print_error("Error\nneed at least 3 lines\n", general));
+		print_error("Error\nneed at least 3 lines\n", general);
+	if (check_help((*general)->map) == 1)
+		print_error("", general);
 	while (tmp->next)
 	{
 		if (first_line)
 		{
 			if (is_wall_line(tmp->line))
-				exit (print_error("Error\n1 line must be all 1\n", general));
+				print_error("Error\n1 line must be all 1\n", general);
 			first_line = 0;
 		}
 		tmp = tmp->next;
 	}
 	if (is_wall_line(tmp->line))
-		exit (print_error("last line must contain only <1>'s\n", general));
-	if (check_help((*general)->map) == 1)
-		exit (1);
+		print_error("last line must contain only <1>'s\n", general);
 	return (0);
 }
