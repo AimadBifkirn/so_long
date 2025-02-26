@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 11:23:01 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:10:38 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct so_long
 	void		*player_f[3];
 	void		*player_b[3];
 	void		*coin[7];
+	void		*door;
 	void		*background;
 	int			frame;
 	int			coin_index;
@@ -71,5 +72,6 @@ char	*ft_strcpy(char *dest, char *src);
 int		allocate_imags(t_general **general);
 void	ft_putstr_fd(char *s, int fd);
 int		allocate_imags_coins(t_general **general);
+int		allocate_images_door(t_general **general);
 
 #endif

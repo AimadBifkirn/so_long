@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:00:32 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 11:23:19 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:09:32 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,5 @@ void	initialize_struct(t_general **general, int fd)
 	lenght_width(general);
 	(*general)->frame = 0;
 	(*general)->coin_index = 0;
+	(*general)->num_coin = 0;
 }

@@ -36,7 +36,18 @@ int allocate_imags_coins(t_general **general)
 	(*general)->coin[4] = mlx_xpm_file_to_image((*general)->mlx, "./imags/coins/coin4.xpm", &width, &lenght);
 	(*general)->coin[5] = mlx_xpm_file_to_image((*general)->mlx, "./imags/coins/coin5.xpm", &width, &lenght);
 	(*general)->coin[6] = mlx_xpm_file_to_image((*general)->mlx, "./imags/coins/coin6.xpm", &width, &lenght);
-	if (!(*general)->coin[0] || !(*general)->coin[1] || !(*general)->coin[2] || !(*general)->coin[3] || !(*general)->coin[4] || !(*general)->coin[5] || !(*general)->coin[6])
+	if (!(*general)->coin[0] || !(*general)->coin[1] || !(*general)->coin[2] || !(*general)->coin[3]
+		 || !(*general)->coin[4] || !(*general)->coin[5] || !(*general)->coin[6])
+		return (1);
+	return (0);
+}
+
+int	allocate_images_door(t_general **general)
+{
+	int	lenght;
+	int	width;
+	(*general)->door = mlx_xpm_file_to_image((*general)->mlx, "./imags/door/door0.xpm", &width, &lenght);
+	if (!(*general)->door)
 		return (1);
 	return (0);
 }

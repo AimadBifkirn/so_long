@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:57:47 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 11:35:16 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 12:57:18 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,19 @@ void	free_player_images(t_general **general)
 		mlx_destroy_image((*general)->mlx, (*general)->player_b[2]);
 }
 
+void	free_door_images(t_general **general)
+{
+	if ((*general)->door)
+		mlx_destroy_image((*general)->mlx, (*general)->door);
+}
+
 void	free_images(t_general **general)
 {
 	if ((*general)->wall)
 		mlx_destroy_image((*general)->mlx, (*general)->wall);
 	free_player_images(general);
 	free_coin_images(general);
+	free_door_images(general);
 	if ((*general)->background)
 		mlx_destroy_image((*general)->mlx, (*general)->background);
 }
