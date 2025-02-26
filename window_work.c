@@ -159,8 +159,6 @@ void	put_help(t_general **general, char c, int x, int y)
 	}
 	if (c == 'E')
 		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->door[0], x * 48, y * 48);
-	if (c == 'B')
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->skeleton[0], x * 48, y * 48);
 }
 
 void	put_walls(t_general **general)
@@ -186,6 +184,36 @@ void	put_walls(t_general **general)
 	}
 }
 
+int	handel_animation(t_general **general)
+{
+	t_map *map;
+	int	i;
+	int	y;
+
+	map = (*general)->map;
+	if ((*general)->anim_i == 20000)
+	{
+		if ((*general)->ske_i == 13)
+			(*general)->ske_i = 0;
+		y = 0;
+		while (map)
+		{
+			i = 0;
+			while (map->line[i])
+			{
+				if (map->line[i] == 'B')
+					mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->skeleton[(*general)->ske_i], i * 48, y * 48);
+				i++;
+			}
+			map = map->next;
+			y++;
+		}
+		(*general)->ske_i++;
+		(*general)->anim_i = 0;
+	}
+	(*general)->anim_i++;
+}
+
 int	window_work(t_general **general)
 {
 	(*general)->mlx = mlx_init();
@@ -193,6 +221,7 @@ int	window_work(t_general **general)
 	if (allocate_imags(general) || allocate_imags_coins(general) || allocate_images_door(general) || allocate_images_enimies(general))
 		return(1);
 	put_walls(general);
+	mlx_loop_hook((*general)->mlx, handel_animation, general);
 	mlx_key_hook((*general)->window, handel_keys, general);
 	mlx_loop((*general)->mlx);
 	return (0);

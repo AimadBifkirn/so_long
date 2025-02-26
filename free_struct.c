@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:57:47 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 15:20:10 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:33:32 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,36 @@ void	free_door_images(t_general **general)
 		mlx_destroy_image((*general)->mlx, (*general)->door[0]);
 	if ((*general)->door[1])
 		mlx_destroy_image((*general)->mlx, (*general)->door[1]);
+	if ((*general)->skeleton[12])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[12]);
+}
+
+void free_enimie_images(t_general **general)
+{
+	if ((*general)->skeleton[0])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[0]);
+	if ((*general)->skeleton[1])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[1]);
+	if ((*general)->skeleton[2])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[2]);
+	if ((*general)->skeleton[3])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[3]);
+	if ((*general)->skeleton[4])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[4]);
+	if ((*general)->skeleton[5])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[5]);
+	if ((*general)->skeleton[6])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[6]);
+	if ((*general)->skeleton[7])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[7]);
+	if ((*general)->skeleton[8])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[8]);
+	if ((*general)->skeleton[9])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[9]);
+	if ((*general)->skeleton[10])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[10]);
+	if ((*general)->skeleton[11])
+		mlx_destroy_image((*general)->mlx, (*general)->skeleton[11]);
 }
 
 void	free_images(t_general **general)
@@ -72,6 +102,7 @@ void	free_images(t_general **general)
 		mlx_destroy_image((*general)->mlx, (*general)->wall);
 	free_player_images(general);
 	free_coin_images(general);
+	free_enimie_images(general);
 	free_door_images(general);
 	if ((*general)->background)
 		mlx_destroy_image((*general)->mlx, (*general)->background);

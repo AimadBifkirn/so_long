@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 19:04:21 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:52:59 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct so_long
 	int			frame;
 	int			coin_index;
 	int			num_coin;
+	int			anim_i;
+	int			ske_i;
 }	t_general;
 
 typedef struct map
