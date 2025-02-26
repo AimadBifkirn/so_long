@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 20:52:59 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 21:33:16 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct so_long
 	int			num_coin;
 	int			anim_i;
 	int			ske_i;
+	int			score;
 }	t_general;
 
 typedef struct map
@@ -78,5 +79,6 @@ void	ft_putstr_fd(char *s, int fd);
 int		allocate_imags_coins(t_general **general);
 int		allocate_images_door(t_general **general);
 int		allocate_images_enimies(t_general **general);
+char	*ft_itoa(int n);
 
 #endif

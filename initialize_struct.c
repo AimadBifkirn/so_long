@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:00:32 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 20:53:28 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 21:27:12 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ void	initialize_struct(t_general **general, int fd)
 	(*general)->coin_index = 0;
 	(*general)->num_coin = 0;
 	(*general)->anim_i = 0;
-	(*general)->ske_i= 0;
+	(*general)->ske_i = 0;
+	(*general)->score = 0;
 }

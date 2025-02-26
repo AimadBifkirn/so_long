@@ -24,6 +24,11 @@ void	door_open(t_general **general, t_map *map)
 	}
 }
 
+// void	print_score(t_general **general)
+// {
+	
+// }
+
 int	check_next_move(t_general **general, char c)
 {
 	int		x;
@@ -68,6 +73,7 @@ int	check_next_move(t_general **general, char c)
 			}
 			else if (tmp->line[x] == 'C')
 			{
+				// print_score(general);
 				tmp->line[x] = '0';
 				(*general)->num_coin--;
 				if ((*general)->num_coin == 0)
