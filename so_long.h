@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/25 15:31:15 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:23:01 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ typedef struct so_long
 	void		*player_l[3];
 	void		*player_f[3];
 	void		*player_b[3];
+	void		*coin[7];
 	void		*background;
 	int			frame;
+	int			coin_index;
 }	t_general;
 
 typedef struct map
@@ -68,5 +70,6 @@ int		window_work(t_general **general);
 char	*ft_strcpy(char *dest, char *src);
 int		allocate_imags(t_general **general);
 void	ft_putstr_fd(char *s, int fd);
+int		allocate_imags_coins(t_general **general);
 
 #endif

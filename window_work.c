@@ -93,25 +93,47 @@ int	handel_keys(int key, t_general **general)
 	return (0);
 }
 
+// void	put_coin(t_general **general, int *i, int x, int y)
+// {
+// 	if ((*i) == 7)
+// 		(*i) = 0;
+// 	mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->coin[(*i)], x * 48 + 8, y * 48 + 8);
+// 	(*i)++;
+// }
+
+void	put_help(t_general **general, char c, int x, int y)
+{
+	if (c == '1')
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->wall, x * 48, y * 48);
+	if (c != '1')
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, x * 48, y * 48);
+	if (c == 'P')
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w[0], x * 48, y * 48);
+	if (c == 'C')
+	{
+		if ((*general)->coin_index == 7)
+			(*general)->coin_index = 0;
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->coin[(*general)->coin_index], x * 48 + 8, y * 48 + 8);
+		(*general)->coin_index++;
+	}
+}
+
 void	put_walls(t_general **general)
 {
 	int 	y;
 	int 	x;
+	int		i;
 	t_map	*tmp;
 
 	y = 0;
+	i = 0;
 	tmp = (*general)->map;
 	while (tmp)
 	{
 		x = 0;
 		while (tmp->line[x])
 		{
-			if (tmp->line[x] == '1')
-				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->wall, x * 48, y * 48);
-			if (tmp->line[x] != '1')
-				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, x * 48, y * 48);
-			if (tmp->line[x] == 'P')
-				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w[0], x * 48, y * 48);
+			put_help(general, tmp->line[x], x, y);
 			x++;
 		}
 		tmp = tmp->next;
@@ -123,7 +145,7 @@ int	window_work(t_general **general)
 {
 	(*general)->mlx = mlx_init();
 	(*general)->window = mlx_new_window((*general)->mlx, (*general)->width * 48, (*general)->lenght * 48, "so_long");
-	if (allocate_imags(general))
+	if (allocate_imags(general) || allocate_imags_coins(general))
 		return(1);
 	put_walls(general);
 	mlx_key_hook((*general)->window, handel_keys, general);
