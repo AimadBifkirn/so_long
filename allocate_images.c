@@ -46,8 +46,9 @@ int	allocate_images_door(t_general **general)
 {
 	int	lenght;
 	int	width;
-	(*general)->door = mlx_xpm_file_to_image((*general)->mlx, "./imags/door/door0.xpm", &width, &lenght);
-	if (!(*general)->door)
+	(*general)->door[0] = mlx_xpm_file_to_image((*general)->mlx, "./imags/door/door0.xpm", &width, &lenght);
+	(*general)->door[1] = mlx_xpm_file_to_image((*general)->mlx, "./imags/door/door3.xpm", &width, &lenght);
+	if (!(*general)->door[0] || !(*general)->door[1])
 		return (1);
 	return (0);
 }

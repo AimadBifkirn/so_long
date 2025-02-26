@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 13:10:38 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:53:27 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ typedef struct so_long
 	void		*player_f[3];
 	void		*player_b[3];
 	void		*coin[7];
-	void		*door;
+	void		*door[2];
 	void		*background;
 	int			frame;
 	int			coin_index;
+	int			num_coin;
 }	t_general;
 
 typedef struct map

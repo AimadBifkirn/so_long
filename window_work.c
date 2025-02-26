@@ -1,6 +1,29 @@
 #include "so_long.h"
 #include <stdio.h>
 
+void	door_open(t_general **general, t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map)
+	{
+		j = 0;
+		while (map->line[j])
+		{
+			if (map->line[j] == 'E')
+			{
+				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->door[1], j * 48, i * 48);
+				return ;
+			}
+			j++;
+		}
+		map = map->next;
+		i++;
+	}
+}
+
 int	check_next_move(t_general **general, char c)
 {
 	int		x;
@@ -26,21 +49,28 @@ int	check_next_move(t_general **general, char c)
 	{
 		if (y == i)
 		{
-			//stopped here
-			if ((*general)->coin_index == 0)
+			if (tmp->line[x] == '1')
+				return (1);
+			else if (tmp->line[x] == 'E')
 			{
-				door_open();
-				(*general)->coin_index--;
-			}
-			else if ((*general)->coin_index < 0 && tmp->line[x] == 'E')
-			{
-				free_struct(general);
-				exit (0);
+				if ((*general)->num_coin == 0)
+				{
+					free_struct(general);
+					exit (0);
+				}
+				else
+					return (1);
 			}
 			else if (tmp->line[x] == 'C')
-				(*general)->coin_index--;
-			else if (tmp->line[x] == '1' || tmp->line[x] == 'E')
-				return (1);
+			{
+				tmp->line[x] = '0';
+				(*general)->num_coin--;
+				if ((*general)->num_coin == 0)
+				{
+					door_open(general, (*general)->map);
+				}
+				return (0);
+			}
 			else
 				break ;
 		}
@@ -57,7 +87,7 @@ void	update_frame(t_general **general, int i, int key)
 		(*general)->frame = 0;
 	if (!check_next_move(general, key))
 	{
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, (*general)->x * 48, (*general)->y * 48);
+		// mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, (*general)->x * 48, (*general)->y * 48);
 		if (i == 0)
 			(*general)->x++;
 		else if (i == 1)
@@ -120,9 +150,10 @@ void	put_help(t_general **general, char c, int x, int y)
 			(*general)->coin_index = 0;
 		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->coin[(*general)->coin_index], x * 48 + 8, y * 48 + 8);
 		(*general)->coin_index++;
+		(*general)->num_coin++;
 	}
 	if (c == 'E')
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->door, x * 48, y * 48);
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->door[0], x * 48, y * 48);
 }
 
 void	put_walls(t_general **general)
