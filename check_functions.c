@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:54:44 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 13:08:51 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:05:38 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ int	find_elem(char *str, int *p, int *c, int *e)
 			(*c)++;
 		else if (str[i] == 'E')
 			(*e)++;
-		else if (str[i] == '1' || str[i] == '0')
+		else if (str[i] == '1' || str[i] == '0' || str[i] == 'B')
 			;
 		else
 		{
 			write (1, "Error\nInvalid character '", 26);
 			write (1, &str[i], 1);
-			write (1, "' found in map\n", 14);
+			write (1, "' found in map\n", 15);
 			return (1);
 		}
 		i++;

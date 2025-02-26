@@ -52,3 +52,26 @@ int	allocate_images_door(t_general **general)
 		return (1);
 	return (0);
 }
+int	allocate_images_enimies(t_general **general)
+{
+	int	lenght;
+	int	width;
+	(*general)->skeleton[0] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton0.xpm", &width, &lenght);
+	(*general)->skeleton[1] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton1.xpm", &width, &lenght);
+	(*general)->skeleton[2] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton2.xpm", &width, &lenght);
+	(*general)->skeleton[3] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton3.xpm", &width, &lenght);
+	(*general)->skeleton[4] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton4.xpm", &width, &lenght);
+	(*general)->skeleton[5] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton5.xpm", &width, &lenght);
+	(*general)->skeleton[6] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton6.xpm", &width, &lenght);
+	(*general)->skeleton[7] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton7.xpm", &width, &lenght);
+	(*general)->skeleton[8] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton8.xpm", &width, &lenght);
+	(*general)->skeleton[9] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton9.xpm", &width, &lenght);
+	(*general)->skeleton[10] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton10.xpm", &width, &lenght);
+	(*general)->skeleton[11] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton11.xpm", &width, &lenght);
+	(*general)->skeleton[12] = mlx_xpm_file_to_image((*general)->mlx, "./imags/enimies/skeleton12.xpm", &width, &lenght);
+	if (!(*general)->skeleton[0] || !(*general)->skeleton[1] || !(*general)->skeleton[2] || !(*general)->skeleton[3] || !(*general)->skeleton[4]
+		|| !(*general)->skeleton[5] || !(*general)->skeleton[6] || !(*general)->skeleton[7] || !(*general)->skeleton[8]
+		|| !(*general)->skeleton[9] || !(*general)->skeleton[10] || !(*general)->skeleton[11] || !(*general)->skeleton[12])
+		return (1);
+	return (0);
+}

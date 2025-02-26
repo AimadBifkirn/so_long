@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 14:53:27 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 19:04:21 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct so_long
 	void		*player_b[3];
 	void		*coin[7];
 	void		*door[2];
+	void		*skeleton[13];
 	void		*background;
 	int			frame;
 	int			coin_index;
@@ -74,5 +75,6 @@ int		allocate_imags(t_general **general);
 void	ft_putstr_fd(char *s, int fd);
 int		allocate_imags_coins(t_general **general);
 int		allocate_images_door(t_general **general);
+int		allocate_images_enimies(t_general **general);
 
 #endif

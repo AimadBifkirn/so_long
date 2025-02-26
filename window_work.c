@@ -49,6 +49,11 @@ int	check_next_move(t_general **general, char c)
 	{
 		if (y == i)
 		{
+			if (tmp->line[x] == 'B')
+			{
+				free_struct(general);
+				exit (1);
+			}
 			if (tmp->line[x] == '1')
 				return (1);
 			else if (tmp->line[x] == 'E')
@@ -154,6 +159,8 @@ void	put_help(t_general **general, char c, int x, int y)
 	}
 	if (c == 'E')
 		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->door[0], x * 48, y * 48);
+	if (c == 'B')
+		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->skeleton[0], x * 48, y * 48);
 }
 
 void	put_walls(t_general **general)
@@ -183,7 +190,7 @@ int	window_work(t_general **general)
 {
 	(*general)->mlx = mlx_init();
 	(*general)->window = mlx_new_window((*general)->mlx, (*general)->width * 48, (*general)->lenght * 48, "so_long");
-	if (allocate_imags(general) || allocate_imags_coins(general) || allocate_images_door(general))
+	if (allocate_imags(general) || allocate_imags_coins(general) || allocate_images_door(general) || allocate_images_enimies(general))
 		return(1);
 	put_walls(general);
 	mlx_key_hook((*general)->window, handel_keys, general);

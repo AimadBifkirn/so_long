@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:58:07 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/24 21:40:00 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:03:07 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	flood_fill(t_general *general, char **str, int y, int x)
 {
 	if (y < 0 || x < 0 || y > general->lenght || x > general->width)
 		return ;
-	if (str[y][x] == 'E')
+	if (str[y][x] == 'E' || str[y][x] == 'B')
 		str[y][x] = '1';
 	if (str[y][x] == '0' || str[y][x] == 'P' || str[y][x] == 'C')
 	{
