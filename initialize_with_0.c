@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 09:42:33 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 09:45:15 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:06:16 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	initial_images(t_general **general)
 	(*general)->door[1] = NULL;
 	(*general)->wall = NULL;
 	(*general)->background = NULL;
+	(*general)->black_backg = NULL;
 }
 
 void	initial_skeleton_mages(t_general **general)

@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 09:42:15 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:01:01 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct so_long
 	void		*door[2];
 	void		*skeleton[13];
 	void		*background;
+	void		*black_backg;
 	int			frame;
 	int			coin_index;
 	int			num_coin;

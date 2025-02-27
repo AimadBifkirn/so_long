@@ -18,9 +18,11 @@ int	allocate_imags(t_general **general)
 	(*general)->player_b[1] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_b2.xpm", &width, &lenght);
 	(*general)->player_b[2] = mlx_xpm_file_to_image((*general)->mlx, "./imags/player_b3.xpm", &width, &lenght);
 	(*general)->background = mlx_xpm_file_to_image((*general)->mlx, "./imags/background.xpm", &width, &lenght);
+	(*general)->black_backg = mlx_xpm_file_to_image((*general)->mlx, "./imags/black_backg.xpm", &width, &lenght);
 	if (!(*general)->player_b[0] || !(*general)->player_b[1] || !(*general)->player_b[2] || !(*general)->player_w[0]
 		|| !(*general)->player_w[1] || !(*general)->player_w[2] || !(*general)->player_f[0] || !(*general)->player_f[1]
-		|| !(*general)->player_f[2] || !(*general)->player_l[0] || !(*general)->player_l[1] || !(*general)->player_l[2])
+		|| !(*general)->player_f[2] || !(*general)->player_l[0] || !(*general)->player_l[1] || !(*general)->player_l[2]
+		|| !(*general)->black_backg)
 		return (1);
 	return (0);
 }

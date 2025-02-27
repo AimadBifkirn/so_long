@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:40:21 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/22 11:21:03 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:36:38 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	ft_memcpy(res, s1, size1);
 	ft_memcpy(res + size1, s2, size2);
 	res[size1 + size2] = '\0';
-	free(s1);
 	free(s2);
 	return (res);
 }

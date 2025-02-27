@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:57:47 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 20:33:32 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:30:43 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	free_images(t_general **general)
 	free_door_images(general);
 	if ((*general)->background)
 		mlx_destroy_image((*general)->mlx, (*general)->background);
+	if ((*general)->black_backg)
+		mlx_destroy_image((*general)->mlx, (*general)->black_backg);
 }
 
 void	free_struct(t_general **general)

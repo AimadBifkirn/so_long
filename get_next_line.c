@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:25:02 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/22 11:21:16 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:35:25 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	char		*read;
+	char		*tmp;
 
 	read = NULL;
 	if (fd < 0)
@@ -99,7 +100,9 @@ char	*get_next_line(int fd)
 		line = get_read(fd);
 		if (!line)
 			break ;
-		read = ft_strjoin(read, line);
+		tmp = read;
+		read = ft_strjoin(tmp, line);
+		free (tmp);
 	}
 	if (!line && !read)
 		return (NULL);
