@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:13:52 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 16:38:18 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:19:43 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	print_score(t_general **g)
 	int		i;
 
 	i = 0;
-	(*g)->score++;
 	str = ft_itoa ((*g)->score);
 	str = ft_strjoin("score : ", str);
 	x = (((*g)->width * 48) / 2) - (ft_strlen(str) * 3);
@@ -46,5 +45,6 @@ void	print_score(t_general **g)
 	}
 	mlx_string_put((*g)->mlx, (*g)->window, x,
 		(*g)->lenght * 48 + 14, 0xFFFF00, str);
+	(*g)->score++;
 	free(str);
 }
