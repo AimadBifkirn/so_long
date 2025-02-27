@@ -24,10 +24,16 @@ void	door_open(t_general **general, t_map *map)
 	}
 }
 
-// void	print_score(t_general **general)
-// {
-	
-// }
+void	print_score(int score)
+{
+	char	*str;
+
+	str = ft_itoa (score);
+	ft_putstr_fd("score : ", 1);
+	ft_putstr_fd(str, 1);
+	write (1, "\n", 1);
+	free(str);
+}
 
 int	check_next_move(t_general **general, char c)
 {
@@ -73,7 +79,6 @@ int	check_next_move(t_general **general, char c)
 			}
 			else if (tmp->line[x] == 'C')
 			{
-				// print_score(general);
 				tmp->line[x] = '0';
 				(*general)->num_coin--;
 				if ((*general)->num_coin == 0)
@@ -98,7 +103,6 @@ void	update_frame(t_general **general, int i, int key)
 		(*general)->frame = 0;
 	if (!check_next_move(general, key))
 	{
-		// mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, (*general)->x * 48, (*general)->y * 48);
 		if (i == 0)
 			(*general)->x++;
 		else if (i == 1)
@@ -107,6 +111,7 @@ void	update_frame(t_general **general, int i, int key)
 			(*general)->y--;
 		else if (i == 3)
 			(*general)->y++;
+		print_score(++(*general)->score);
 	}
 }
 
@@ -228,6 +233,7 @@ int	window_work(t_general **general)
 		return(1);
 	put_walls(general);
 	mlx_loop_hook((*general)->mlx, handel_animation, general);
+	print_score((*general)->score);
 	mlx_key_hook((*general)->window, handel_keys, general);
 	mlx_loop((*general)->mlx);
 	return (0);

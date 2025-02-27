@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 21:33:16 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:42:15 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ int		allocate_imags_coins(t_general **general);
 int		allocate_images_door(t_general **general);
 int		allocate_images_enimies(t_general **general);
 char	*ft_itoa(int n);
+void	initialize_everything_with_0(t_general **general);
 
 #endif

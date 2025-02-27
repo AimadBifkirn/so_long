@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:00:32 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 21:27:12 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:29:43 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	general_initialize_map(t_general **general, int fd)
 {
 	char	*read;
 
-	(*general)->map = NULL;
 	read = get_next_line(fd);
 	while (read)
 	{
@@ -95,15 +94,10 @@ void	initialize_struct(t_general **general, int fd)
 		ft_putstr_fd("Erro\nmalloc failed\n", 2);
 		exit (1);	
 	}
+	initialize_everything_with_0(general);
 	if (general_initialize_map(general, fd))
 		exit (print_error("Error\nmap is empthy\n", general));
 	general_initialize_coyp_map(general);
 	start_position(general);
 	lenght_width(general);
-	(*general)->frame = 0;
-	(*general)->coin_index = 0;
-	(*general)->num_coin = 0;
-	(*general)->anim_i = 0;
-	(*general)->ske_i = 0;
-	(*general)->score = 0;
 }

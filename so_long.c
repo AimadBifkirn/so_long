@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:38:49 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/25 15:44:39 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:23:59 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	main(int argc, char **argv)
 	int			fd;
 	t_general	*general;
 
+	general = NULL;
 	check_argc(argc);
 	check_valid_file(argv[1]);
 	open_fd(&fd, argv[1]);
