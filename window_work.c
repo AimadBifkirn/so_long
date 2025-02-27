@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:36:45 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 16:38:58 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 22:55:11 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	put_help(t_general **g, char c, int x, int y)
 			(*g)->window, (*g)->back, x * 48, y * 48);
 	if (c == 'P')
 		mlx_put_image_to_window((*g)->mlx,
-			(*g)->window, (*g)->p_w[0], x * 48, y * 48);
+			(*g)->window, (*g)->p_f[0], x * 48, y * 48);
 	if (c == 'C')
 	{
 		if ((*g)->coin_index == 7)
