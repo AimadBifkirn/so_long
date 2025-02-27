@@ -6,30 +6,12 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:38:49 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 09:23:59 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:18:36 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <stdio.h>
-
-int	print_error(char *str, t_general **general)
-{
-	if (general && *general)
-	{
-		if ((*general)->map)
-			free_map(&(*general)->map);
-		if ((*general)->copy_map)
-		{
-			free_table((*general)->copy_map);
-			(*general)->copy_map = NULL;
-		}
-		free (*general);
-		*general = NULL;
-	}
-	ft_putstr_fd(str, 2);
-	exit (1);
-}
 
 char	*trim_newline(char *line)
 {

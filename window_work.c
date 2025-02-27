@@ -1,7 +1,18 @@
-#include "so_long.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window_work.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 14:36:45 by abifkirn          #+#    #+#             */
+/*   Updated: 2025/02/27 16:38:58 by abifkirn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	door_open(t_general **general, t_map *map)
+#include "so_long.h"
+
+void	door_open(t_general **g, t_map *map)
 {
 	int	i;
 	int	j;
@@ -14,7 +25,8 @@ void	door_open(t_general **general, t_map *map)
 		{
 			if (map->line[j] == 'E')
 			{
-				mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->door[1], j * 48, i * 48);
+				mlx_put_image_to_window((*g)->mlx, (*g)->window,
+					(*g)->door[1], j * 48, i * 48);
 				return ;
 			}
 			j++;
@@ -24,169 +36,54 @@ void	door_open(t_general **general, t_map *map)
 	}
 }
 
-void	print_score(t_general **g)
-{
-	char	*str;
-	int		x;
-	int		i;
-
-	i = 0;
-	(*g)->score++;
-	str = ft_itoa ((*g)->score);
-	str = ft_strjoin("score : ", str);
-	x = (((*g)->width * 48) / 2) - (ft_strlen(str) * 3);
-	ft_putstr_fd(str, 1);
-	write (1, "\n", 1);
-	while (i < (*g)->width)
-	{
-		mlx_put_image_to_window((*g)->mlx, (*g)->window, (*g)->black_backg, i * 48, (*g)->lenght * 48);
-		i++;
-	}
-	mlx_string_put((*g)->mlx, (*g)->window, x, (*g)->lenght * 48 + 14, 0xFFFF00, str);
-	free(str);
-}
-
-int	check_next_move(t_general **general, char c)
-{
-	int		x;
-	int		y;
-	int		i;
-	t_map	*tmp;
-
-	x = (*general)->x;
-	y = (*general)->y;
-	tmp = (*general)->map;
-	i = 0;
-	if (c == 'd')
-		x++;
-	else if (c == 'w')
-		y--;
-	else if (c == 's')
-		y++;
-	else if (c == 'a')
-		x--;
-	else
-		return (1);
-	while (tmp)
-	{
-		if (y == i)
-		{
-			if (tmp->line[x] == 'B')
-			{
-				free_struct(general);
-				exit (1);
-			}
-			if (tmp->line[x] == '1')
-				return (1);
-			else if (tmp->line[x] == 'E')
-			{
-				if ((*general)->num_coin == 0)
-				{
-					free_struct(general);
-					exit (0);
-				}
-				else
-					return (1);
-			}
-			else if (tmp->line[x] == 'C')
-			{
-				tmp->line[x] = '0';
-				(*general)->num_coin--;
-				if ((*general)->num_coin == 0)
-				{
-					door_open(general, (*general)->map);
-				}
-				return (0);
-			}
-			else
-				break ;
-		}
-		i++;
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-void	update_frame(t_general **general, int i, int key)
+void	update_frame(t_general **general, int key)
 {
 	(*general)->frame++;
 	if ((*general)->frame == 3)
 		(*general)->frame = 0;
 	if (!check_next_move(general, key))
 	{
-		if (i == 0)
+		if (key == 'd')
 			(*general)->x++;
-		else if (i == 1)
+		else if (key == 'a')
 			(*general)->x--;
-		else if (i == 2)
+		else if (key == 'w')
 			(*general)->y--;
-		else if (i == 3)
+		else if (key == 's')
 			(*general)->y++;
 		print_score(general);
 	}
 }
 
-void	update_player_pos(t_general **general, int key)
-{
-	mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, (*general)->x * 48, (*general)->y * 48);
-	if (key == 'd')
-	{
-		update_frame(general, 0, key);
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
-	}
-	else if (key == 'a')
-	{
-		update_frame(general, 1, key);
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_l[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
-	}
-	else if (key == 'w')
-	{
-		update_frame(general, 2, key);
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_b[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
-	}
-	else if (key == 's')
-	{
-		update_frame(general, 3, key);
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_f[(*general)->frame], (*general)->x * 48, (*general)->y * 48);
-	}
-}
-
-int	handel_keys(int key, t_general **general)
-{
-	if (key == 65307)
-	{
-		free_struct(general);
-		exit (0);
-	}
-	if (key == 'w' || key == 'a' || key == 's' || key == 'd')
-		update_player_pos(general, key);
-	return (0);
-}
-
-void	put_help(t_general **general, char c, int x, int y)
+void	put_help(t_general **g, char c, int x, int y)
 {
 	if (c == '1')
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->wall, x * 48, y * 48);
+		mlx_put_image_to_window((*g)->mlx,
+			(*g)->window, (*g)->wall, x * 48, y * 48);
 	if (c != '1')
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->background, x * 48, y * 48);
+		mlx_put_image_to_window((*g)->mlx,
+			(*g)->window, (*g)->back, x * 48, y * 48);
 	if (c == 'P')
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->player_w[0], x * 48, y * 48);
+		mlx_put_image_to_window((*g)->mlx,
+			(*g)->window, (*g)->p_w[0], x * 48, y * 48);
 	if (c == 'C')
 	{
-		if ((*general)->coin_index == 7)
-			(*general)->coin_index = 0;
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->coin[(*general)->coin_index], x * 48 + 8, y * 48 + 8);
-		(*general)->coin_index++;
-		(*general)->num_coin++;
+		if ((*g)->coin_index == 7)
+			(*g)->coin_index = 0;
+		mlx_put_image_to_window((*g)->mlx, (*g)->window,
+			(*g)->coin[(*g)->coin_index], x * 48 + 8, y * 48 + 8);
+		(*g)->coin_index++;
+		(*g)->num_coin++;
 	}
 	if (c == 'E')
-		mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->door[0], x * 48, y * 48);
+		mlx_put_image_to_window((*g)->mlx,
+			(*g)->window, (*g)->door[0], x * 48, y * 48);
 }
 
 void	put_walls(t_general **general)
 {
-	int 	y;
-	int 	x;
+	int		y;
+	int		x;
 	int		i;
 	t_map	*tmp;
 
@@ -206,54 +103,19 @@ void	put_walls(t_general **general)
 	}
 }
 
-int	handel_animation(t_general **general)
+int	window_work(t_general **g)
 {
-	t_map *map;
-	int	i;
-	int	y;
-
-	map = (*general)->map;
-	if ((*general)->anim_i == 20000)
-	{
-		if ((*general)->ske_i == 13)
-			(*general)->ske_i = 0;
-		y = 0;
-		while (map)
-		{
-			i = 0;
-			while (map->line[i])
-			{
-				if (map->line[i] == 'B')
-					mlx_put_image_to_window((*general)->mlx, (*general)->window, (*general)->skeleton[(*general)->ske_i], i * 48, y * 48);
-				i++;
-			}
-			map = map->next;
-			y++;
-		}
-		(*general)->ske_i++;
-		(*general)->anim_i = 0;
-	}
-	(*general)->anim_i++;
-}
-
-int handle_cross(t_general **g)
-{
-	free_struct(g);
-	exit(0);
-	return (0);
-}
-
-int	window_work(t_general **general)
-{
-	(*general)->mlx = mlx_init();
-	(*general)->window = mlx_new_window((*general)->mlx, (*general)->width * 48, (*general)->lenght * 48 + 20, "so_long");
-	if (allocate_imags(general) || allocate_imags_coins(general) || allocate_images_door(general) || allocate_images_enimies(general))
-		return(1);
-	put_walls(general);
-	mlx_loop_hook((*general)->mlx, handel_animation, general);
-	print_score(general);
-	mlx_hook((*general)->window, 2, 1L << 0, handel_keys, general);
-	mlx_hook((*general)->window, 17, 0, handle_cross, general);
-	mlx_loop((*general)->mlx);
+	(*g)->mlx = mlx_init();
+	(*g)->window = mlx_new_window((*g)->mlx,
+			(*g)->width * 48, (*g)->lenght * 48 + 20, "so_long");
+	if (allocate_imags(g) || allocate_imags_coins(g)
+		|| allocate_images_door(g) || allocate_images_enimies(g))
+		return (1);
+	put_walls(g);
+	mlx_loop_hook((*g)->mlx, handel_animation, g);
+	print_score(g);
+	mlx_hook((*g)->window, 2, 1L << 0, handel_keys, g);
+	mlx_hook((*g)->window, 17, 0, handle_cross, g);
+	mlx_loop((*g)->mlx);
 	return (0);
 }

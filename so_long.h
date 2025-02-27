@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 12:01:01 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:39:54 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ typedef struct so_long
 	void		*mlx;
 	void		*window;
 	void		*wall;
-	void		*player_w[3];
-	void		*player_l[3];
-	void		*player_f[3];
-	void		*player_b[3];
+	void		*p_w[3];
+	void		*p_l[3];
+	void		*p_f[3];
+	void		*p_b[3];
 	void		*coin[7];
 	void		*door[2];
-	void		*skeleton[13];
-	void		*background;
-	void		*black_backg;
+	void		*s[13];
+	void		*back;
+	void		*b_back;
 	int			frame;
 	int			coin_index;
 	int			num_coin;
@@ -60,7 +60,6 @@ void	*ft_memcpy(char *dst, char *src, size_t n);
 void	add_node(t_map **map, char *readed);
 int		ft_strcmp(char *s1, char *s2);
 int		is_wall_line(char *line);
-void	free_map(t_map **map);
 void	free_table(char **table);
 void	initialize_struct(t_general **general, int fd);
 void	flood_fill(t_general *general, char **str, int x, int y);
@@ -82,5 +81,13 @@ int		allocate_images_door(t_general **general);
 int		allocate_images_enimies(t_general **general);
 char	*ft_itoa(int n);
 void	initialize_everything_with_0(t_general **general);
+void	free_images(t_general **g);
+int		check_next_move(t_general **general, char c);
+int		handel_keys(int key, t_general **general);
+int		handle_cross(t_general **g);
+int		handel_animation(t_general **g);
+void	print_score(t_general **g);
+void	update_frame(t_general **general, int key);
+void	door_open(t_general **g, t_map *map);
 
 #endif

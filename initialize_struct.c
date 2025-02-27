@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:00:32 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 09:29:43 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:11:28 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	initialize_struct(t_general **general, int fd)
 	if (!(*general))
 	{
 		ft_putstr_fd("Erro\nmalloc failed\n", 2);
-		exit (1);	
+		exit(1);
 	}
 	initialize_everything_with_0(general);
 	if (general_initialize_map(general, fd))

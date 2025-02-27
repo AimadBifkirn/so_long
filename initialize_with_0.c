@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 09:42:33 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 12:06:16 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:13:08 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	initial_images(t_general **general)
 {
-	(*general)->player_b[0] = NULL;
-	(*general)->player_b[1] = NULL;
-	(*general)->player_b[2] = NULL;
-	(*general)->player_l[0] = NULL;
-	(*general)->player_l[1] = NULL;
-	(*general)->player_l[2] = NULL;
-	(*general)->player_f[0] = NULL;
-	(*general)->player_f[1] = NULL;
-	(*general)->player_f[2] = NULL;
-	(*general)->player_w[0] = NULL;
-	(*general)->player_w[1] = NULL;
-	(*general)->player_w[2] = NULL;
+	(*general)->p_b[0] = NULL;
+	(*general)->p_b[1] = NULL;
+	(*general)->p_b[2] = NULL;
+	(*general)->p_l[0] = NULL;
+	(*general)->p_l[1] = NULL;
+	(*general)->p_l[2] = NULL;
+	(*general)->p_f[0] = NULL;
+	(*general)->p_f[1] = NULL;
+	(*general)->p_f[2] = NULL;
+	(*general)->p_w[0] = NULL;
+	(*general)->p_w[1] = NULL;
+	(*general)->p_w[2] = NULL;
 	(*general)->coin[0] = NULL;
 	(*general)->coin[1] = NULL;
 	(*general)->coin[2] = NULL;
@@ -36,25 +36,25 @@ void	initial_images(t_general **general)
 	(*general)->door[0] = NULL;
 	(*general)->door[1] = NULL;
 	(*general)->wall = NULL;
-	(*general)->background = NULL;
-	(*general)->black_backg = NULL;
+	(*general)->back = NULL;
+	(*general)->b_back = NULL;
 }
 
 void	initial_skeleton_mages(t_general **general)
 {
-	(*general)->skeleton[0] = NULL;
-	(*general)->skeleton[1] = NULL;
-	(*general)->skeleton[2] = NULL;
-	(*general)->skeleton[3] = NULL;
-	(*general)->skeleton[4] = NULL;
-	(*general)->skeleton[5] = NULL;
-	(*general)->skeleton[6] = NULL;
-	(*general)->skeleton[7] = NULL;
-	(*general)->skeleton[8] = NULL;
-	(*general)->skeleton[9] = NULL;
-	(*general)->skeleton[10] = NULL;
-	(*general)->skeleton[11] = NULL;
-	(*general)->skeleton[12] = NULL;
+	(*general)->s[0] = NULL;
+	(*general)->s[1] = NULL;
+	(*general)->s[2] = NULL;
+	(*general)->s[3] = NULL;
+	(*general)->s[4] = NULL;
+	(*general)->s[5] = NULL;
+	(*general)->s[6] = NULL;
+	(*general)->s[7] = NULL;
+	(*general)->s[8] = NULL;
+	(*general)->s[9] = NULL;
+	(*general)->s[10] = NULL;
+	(*general)->s[11] = NULL;
+	(*general)->s[12] = NULL;
 }
 
 void	initialize_everything_with_0(t_general **general)
