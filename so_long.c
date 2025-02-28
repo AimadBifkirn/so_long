@@ -6,12 +6,11 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:38:49 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 14:18:36 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:29:31 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 char	*trim_newline(char *line)
 {
@@ -27,7 +26,10 @@ char	*trim_newline(char *line)
 
 int	rectangle_walls_check(char *str, int len)
 {
-	if (ft_strlen(str) != len)
+	int l;
+
+	l = ft_strlen(str);
+	if (l != len)
 	{
 		ft_putstr_fd("Error\nMap is not rectangular\n", 2);
 		return (1);
@@ -69,7 +71,7 @@ int	main(int argc, char **argv)
 	check_valid_file(argv[1]);
 	open_fd(&fd, argv[1]);
 	initialize_struct(&general, fd);
-	check_valid_map(fd, &general);
+	check_valid_map(&general);
 	close(fd);
 	flood_fill(general, general->copy_map, general->y, general->x);
 	if (check_result(general->copy_map))

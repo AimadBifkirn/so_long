@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:23:00 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 16:39:54 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:23:56 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*trim_newline(char *line);
 int		len_map(t_map **map);
 int		print_error(char *str, t_general **general);
 void	free_struct(t_general **general);
-int		check_valid_map(int fd, t_general **general);
+int		check_valid_map(t_general **general);
 void	check_valid_file(char *file);
 int		check_result(char **str);
 int		rectangle_walls_check(char *str, int len);

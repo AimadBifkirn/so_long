@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:36:45 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/28 11:01:46 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:25:44 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,9 @@ void	put_all(t_general **general)
 {
 	int		y;
 	int		x;
-	int		i;
 	t_map	*tmp;
 
 	y = 0;
-	i = 0;
 	tmp = (*general)->map;
 	while (tmp)
 	{

@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:54:44 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/26 18:05:38 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:23:42 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	check_help(t_map *map)
 	return (0);
 }
 
-int	check_valid_map(int fd, t_general **general)
+int	check_valid_map(t_general **general)
 {
 	int		first_line;
 	t_map	*tmp;

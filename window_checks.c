@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:31:46 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 16:32:49 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:25:08 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,9 @@ int	check_next_move(t_general **general, char c)
 {
 	int		x;
 	int		y;
-	int		i;
-	t_map	*tmp;
 
 	x = (*general)->x;
 	y = (*general)->y;
-	tmp = (*general)->map;
-	i = 0;
 	if (c == 'd')
 		x++;
 	else if (c == 'w')
