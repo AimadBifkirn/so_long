@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:38:49 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/28 14:29:31 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/28 17:01:51 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*trim_newline(char *line)
 
 int	rectangle_walls_check(char *str, int len)
 {
-	int l;
+	int	l;
 
 	l = ft_strlen(str);
 	if (l != len)
