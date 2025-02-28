@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:36:45 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 22:55:11 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:01:46 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	put_help(t_general **g, char c, int x, int y)
 			(*g)->window, (*g)->door[0], x * 48, y * 48);
 }
 
-void	put_walls(t_general **general)
+void	put_all(t_general **general)
 {
 	int		y;
 	int		x;
@@ -111,7 +111,7 @@ int	window_work(t_general **g)
 	if (allocate_imags(g) || allocate_imags_coins(g)
 		|| allocate_images_door(g) || allocate_images_enimies(g))
 		return (1);
-	put_walls(g);
+	put_all(g);
 	mlx_loop_hook((*g)->mlx, handel_animation, g);
 	print_score(g);
 	mlx_hook((*g)->window, 2, 1L << 0, handel_keys, g);

@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:13:52 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/27 18:19:43 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:02:07 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_score(t_general **g)
 
 	i = 0;
 	str = ft_itoa ((*g)->score);
-	str = ft_strjoin("score : ", str);
+	str = ft_strjoin("moves : ", str);
 	x = (((*g)->width * 48) / 2) - (ft_strlen(str) * 3);
 	while (i < (*g)->width)
 	{
