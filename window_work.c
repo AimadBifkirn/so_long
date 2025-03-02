@@ -6,7 +6,7 @@
 /*   By: abifkirn <abifkirn@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:36:45 by abifkirn          #+#    #+#             */
-/*   Updated: 2025/02/28 20:38:06 by abifkirn         ###   ########.fr       */
+/*   Updated: 2025/03/01 13:53:36 by abifkirn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,16 +104,15 @@ void	put_all(t_general **general)
 int	window_work(t_general **g)
 {
 	(*g)->mlx = mlx_init();
-	(*g)->window = mlx_new_window((*g)->mlx,
-			(*g)->width * 48, (*g)->lenght * 48 + 20, "so_long");
-	if (!(*g)->mlx || !(*g)->window)
-	{
-		print_error("problem with mlx_init or creating window", g);
-		exit (1);
-	}
+	if (!(*g)->mlx)
+		print_error("problem with mlx_init", g);
 	if (allocate_imags(g) || allocate_imags_coins(g)
 		|| allocate_images_door(g) || allocate_images_enimies(g))
 		return (1);
+	(*g)->window = mlx_new_window((*g)->mlx,
+			(*g)->width * 48, (*g)->lenght * 48 + 20, "so_long");
+	if (!(*g)->window)
+		print_error("problem creating window", g);
 	put_all(g);
 	mlx_loop_hook((*g)->mlx, handel_animation, g);
 	print_score(g);
